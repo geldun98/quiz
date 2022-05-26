@@ -24,6 +24,13 @@
         </li>
       </ul>
     </div>
+    <div v-if="isCourse" class="course">
+      <h2 class="course-title">Bạn muốn lựa chọn khóa học nào ?</h2>
+      <select id="learn-course" v-model="course">
+        <option>Lập trình Web full-stack Java</option>
+        <option>Lập trình Web full-stack Javascript</option>
+      </select>
+    </div>
     <div class="quiz-footer">
       <div class="box-button">
         <button
@@ -33,9 +40,6 @@
           Tiếp tục
         </button>
       </div>
-    </div>
-    <div v-if="isLoading" class="quiz-loading">
-      Đang gửi dữ liệu, bạn vui lòng !
     </div>
   </div>
 </template>
@@ -48,6 +52,7 @@ export default {
   },
   data() {
     return {
+      arrAnswer: [],
       totalTime: 1000,
       currentTime: null,
       timer: null,
@@ -58,32 +63,142 @@ export default {
       select: false,
       isClick: true,
       result: null,
+      isCourse: false,
+      course: "Lập trình Web full-stack Java",
       questions: [
         {
           question: "5-2",
           answers: [
-            { answer: "3", correct: true },
-            { answer: "4" },
-            { answer: "5" },
-            { answer: "6" },
+            { answer: "3", position: "A", correct: true },
+            { answer: "4", position: "B" },
+            { answer: "5", position: "C" },
+            { answer: "6", position: "D" },
           ],
         },
         {
           question: "1+1",
           answers: [
-            { answer: "1" },
-            { answer: "2", correct: true },
-            { answer: "3" },
-            { answer: "4" },
+            { answer: "1", position: "A" },
+            { answer: "2", position: "B", correct: true },
+            { answer: "3", position: "C" },
+            { answer: "4", position: "D" },
           ],
         },
         {
           question: "2*2",
           answers: [
-            { answer: "2" },
-            { answer: "3" },
-            { answer: "5" },
-            { answer: "4", correct: true },
+            { answer: "2", position: "A" },
+            { answer: "3", position: "B" },
+            { answer: "5", position: "C" },
+            { answer: "4", position: "D", correct: true },
+          ],
+        },
+        {
+          question: "2*3",
+          answers: [
+            { answer: "2", position: "A" },
+            { answer: "3", position: "B" },
+            { answer: "5", position: "C" },
+            { answer: "6", position: "D", correct: true },
+          ],
+        },
+        {
+          question: "5+3",
+          answers: [
+            { answer: "2", position: "A" },
+            { answer: "3", position: "B" },
+            { answer: "5", position: "C" },
+            { answer: "8", position: "D", correct: true },
+          ],
+        },
+        {
+          question: "3-3",
+          answers: [
+            { answer: "0", position: "A", correct: true },
+            { answer: "3", position: "B" },
+            { answer: "5", position: "C" },
+            { answer: "4", position: "D" },
+          ],
+        },
+        {
+          question: "3*2",
+          answers: [
+            { answer: "2", position: "A" },
+            { answer: "3", position: "B" },
+            { answer: "6", position: "C", correct: true },
+            { answer: "4", position: "D" },
+          ],
+        },
+        {
+          question: "0*2",
+          answers: [
+            { answer: "2", position: "A" },
+            { answer: "3", position: "B" },
+            { answer: "0", position: "C", correct: true },
+            { answer: "4", position: "D" },
+          ],
+        },
+        {
+          question: "9*2",
+          answers: [
+            { answer: "2", position: "A" },
+            { answer: "3", position: "B" },
+            { answer: "18", position: "C", correct: true },
+            { answer: "4", position: "D" },
+          ],
+        },
+        {
+          question: "7+5",
+          answers: [
+            { answer: "2", position: "A" },
+            { answer: "16", position: "B" },
+            { answer: "12", position: "C", correct: true },
+            { answer: "4", position: "D" },
+          ],
+        },
+        {
+          question: "6*9",
+          answers: [
+            { answer: "54", position: "A", correct: true },
+            { answer: "16", position: "B" },
+            { answer: "0", position: "C" },
+            { answer: "4", position: "D" },
+          ],
+        },
+        {
+          question: "1+8",
+          answers: [
+            { answer: "2", position: "A" },
+            { answer: "16", position: "B" },
+            { answer: "0", position: "C" },
+            { answer: "9", position: "D", correct: true },
+          ],
+        },
+        {
+          question: "4*4",
+          answers: [
+            { answer: "2", position: "A" },
+            { answer: "16", position: "B", correct: true },
+            { answer: "0", position: "C" },
+            { answer: "4", position: "D" },
+          ],
+        },
+        {
+          question: "8*6",
+          answers: [
+            { answer: "2", position: "A" },
+            { answer: "16", position: "B" },
+            { answer: "48", position: "C", correct: true },
+            { answer: "4", position: "D" },
+          ],
+        },
+        {
+          question: "7*7",
+          answers: [
+            { answer: "49", position: "A", correct: true },
+            { answer: "16", position: "B" },
+            { answer: "0", position: "C" },
+            { answer: "4", position: "D" },
           ],
         },
       ],
@@ -96,18 +211,20 @@ export default {
       this.select = false;
       this.isClick = true;
       if (this.a === this.questions.length) {
+        clearInterval(this.timer);
+        this.result = {
+          score: `${this.score}/${this.questions.length}`,
+          time: this.calculateTime(this.totalTime - this.currentTime),
+        };
+        this.isCourse = true;
+        this.isClick = false;
+      }
+      if (this.a > this.questions.length) {
         this.handleSubmit();
       }
     },
     async handleSubmit() {
-      clearInterval(this.timer);
-      this.result = {
-        score: `${this.score}/${this.questions.length}`,
-        time: this.calculateTime(this.totalTime - this.currentTime),
-      };
-      this.isLoading = true;
       await this.sendGoogleSheet();
-      this.isLoading = false;
       this.$emit("handleQuestion", this.result);
     },
     selectResponse(e) {
@@ -116,11 +233,14 @@ export default {
       if (e.correct) {
         this.score = this.score + 1;
       }
+      e.active = true;
+      this.arrAnswer.push(e.position);
     },
     check(status) {
       if (status.correct) {
         return "correct";
-      } else {
+      }
+      if (status.active && !status.correct) {
         return "incorrect";
       }
     },
@@ -139,6 +259,7 @@ export default {
       return `${minutes}:${seconds}`;
     },
     async sendGoogleSheet() {
+      console.log(this.result.score);
       const scriptURL =
         "https://script.google.com/macros/s/AKfycbzpk0GTB6YkB2C7cDQTphCIyj2zWJtLiZwkALYjyO44gmqnvRO4TNLoNFIpepm3C8J4/exec";
 
@@ -147,6 +268,23 @@ export default {
       formData.append("Email", this.user.email);
       formData.append("Phone", this.user.phone);
       formData.append("Point", this.result.score);
+      formData.append("Course", this.course);
+
+      formData.append("1", this.arrAnswer[0]);
+      formData.append("2", this.arrAnswer[1]);
+      formData.append("3", this.arrAnswer[2]);
+      formData.append("4", this.arrAnswer[3]);
+      formData.append("5", this.arrAnswer[4]);
+      formData.append("6", this.arrAnswer[5]);
+      formData.append("7", this.arrAnswer[6]);
+      formData.append("8", this.arrAnswer[7]);
+      formData.append("9", this.arrAnswer[8]);
+      formData.append("10", this.arrAnswer[9]);
+      formData.append("11", this.arrAnswer[10]);
+      formData.append("12", this.arrAnswer[11]);
+      formData.append("13", this.arrAnswer[12]);
+      formData.append("14", this.arrAnswer[13]);
+      formData.append("15", this.arrAnswer[14]);
       await fetch(scriptURL, { method: "POST", body: formData });
     },
   },
@@ -251,6 +389,13 @@ li {
 .hideButton {
   background: transparent !important;
   color: transparent !important;
+}
+select {
+  margin-top: 15px;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 18px;
+  outline: none;
+  padding: 5px 10px;
 }
 .quiz-time {
   position: absolute;

@@ -10,6 +10,7 @@
       :user="user"
     >
     </Question>
+    <Course v-if="isShow.course"></Course>
     <Result v-if="isShow.result">
       <template slot="user">{{ user.name }}</template>
       <template slot="result-score">{{ result.score }}</template>
@@ -22,6 +23,7 @@
 import Result from "./components/Result.vue";
 import Question from "./components/Question.vue";
 import Register from "./components/Register.vue";
+
 export default {
   name: "App",
   components: { Register, Question, Result },
@@ -30,6 +32,7 @@ export default {
       isShow: {
         register: true,
         question: false,
+        course: false,
         result: false,
       },
       user: {

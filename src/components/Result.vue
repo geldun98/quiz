@@ -29,10 +29,11 @@ export default {
   top: 150px;
   .banner {
     width: 100%;
+    display: flex;
+    justify-content: right;
     img {
-      width: 100%;
+      width: 150px;
     }
-    padding-bottom: 25px;
   }
 }
 </style>
