@@ -53,7 +53,7 @@ export default {
   data() {
     return {
       arrAnswer: [],
-      totalTime: 1000,
+      totalTime: 900,
       currentTime: null,
       timer: null,
       isLoading: false,
@@ -259,7 +259,6 @@ export default {
       return `${minutes}:${seconds}`;
     },
     async sendGoogleSheet() {
-      console.log(this.result.score);
       const scriptURL =
         "https://script.google.com/macros/s/AKfycbzpk0GTB6YkB2C7cDQTphCIyj2zWJtLiZwkALYjyO44gmqnvRO4TNLoNFIpepm3C8J4/exec";
 
