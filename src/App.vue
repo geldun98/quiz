@@ -9,7 +9,7 @@
       :user="user"
       @handleQuestion="handleQuestion"
     ></BoxQuestion>
-    <End :user="user"></End>
+    <End v-if="isShow.end" :user="user"></End>
   </div>
 </template>
 
