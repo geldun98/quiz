@@ -187,10 +187,10 @@ export default {
           question:
             "Câu hỏi 13: Nếu từ WOLF tương ứng với số 8526, thì từ FLOW tương ứng với số nào sau đây?",
           answers: [
-            { answer: "2", position: "A: 6258", correct: true },
-            { answer: "16", position: "B: 2856" },
-            { answer: "0", position: "C: 5862" },
-            { answer: "4", position: "D: 6852" },
+            { answer: "A: 6258", position: "A", correct: true },
+            { answer: "B: 2856", position: "B" },
+            { answer: "C: 5862", position: "C" },
+            { answer: "D: 6852", position: "D" },
           ],
         },
         {
