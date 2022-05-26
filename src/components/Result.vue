@@ -1,5 +1,8 @@
 <template>
   <div class="result">
+    <div class="banner">
+      <img src="@/assets/banner.png" alt="banner" />
+    </div>
     <div class="result-detail">
       <h2>Thí sinh: <slot name="user"> </slot></h2>
       <p>Điểm số: <slot name="result-score"></slot></p>
@@ -18,10 +21,18 @@ export default {
 .result {
   margin: 0 auto;
   background: white;
-  width: 600px;
+  width: 100%;
+  max-width: 600px;
   padding: 25px;
   border-radius: 10px;
   position: relative;
   top: 150px;
+  .banner {
+    width: 100%;
+    img {
+      width: 100%;
+    }
+    padding-bottom: 25px;
+  }
 }
 </style>

@@ -1,6 +1,9 @@
 <template>
   <div class="register">
     <div class="register-form">
+      <div class="banner">
+        <img src="@/assets/banner.png" alt="banner" />
+      </div>
       <div class="input-filed input-name">
         <input
           v-model="name"
@@ -106,7 +109,9 @@ export default {
   &-form {
     position: relative;
     top: 100px;
-    width: 600px;
+    width: 100%;
+    max-width: 600px;
+
     height: auto;
     background: white;
     margin: 0 auto;
@@ -131,6 +136,10 @@ export default {
   }
 }
 input {
+  -webkit-user-select: text; /* Chrome, Opera, Safari */
+  -moz-user-select: text; /* Firefox 2+ */
+  -ms-user-select: text; /* IE 10+ */
+  user-select: text; /* Standard syntax */
   font-family: "Poppins", sans-serif;
   font-size: 18px;
   padding: 10px 15px;
@@ -158,5 +167,12 @@ input {
 
 .validateFiled {
   outline-color: #bb2327;
+}
+.banner {
+  width: 100%;
+  img {
+    width: 100%;
+  }
+  padding-bottom: 25px;
 }
 </style>

@@ -170,6 +170,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@mixin maxWidth($width) {
+  @media screen and (max-width: $width) {
+    @content;
+  }
+}
+@mixin minWidth($width) {
+  @media screen and (min-width: $width) {
+    @content;
+  }
+}
 .quiz-loading {
   font-size: 20px;
   font-weight: 600;
@@ -252,6 +262,17 @@ li {
   img {
     height: 20px;
     margin-right: 5px;
+  }
+}
+@include maxWidth(767px) {
+  .box-answer {
+    flex-direction: column;
+    li {
+      width: 100%;
+      font-size: 18px;
+      padding: 10px;
+      border-radius: 10px;
+    }
   }
 }
 </style>
