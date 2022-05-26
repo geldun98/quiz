@@ -10,7 +10,7 @@
       :key="index"
     >
       <div class="box-question">
-        <h2>Câu {{ b }}: {{ element.question }}</h2>
+        <h2>{{ element.question }}</h2>
       </div>
 
       <ul class="box-answer" :class="isClick ? '' : 'preventClick'">
@@ -53,7 +53,7 @@ export default {
   data() {
     return {
       arrAnswer: [],
-      totalTime: 900,
+      totalTime: 1200,
       currentTime: null,
       timer: null,
       isLoading: false,
@@ -67,138 +67,148 @@ export default {
       course: "Lập trình Web full-stack Java",
       questions: [
         {
-          question: "5-2",
+          question:
+            "Câu hỏi 1: Một cửa hàng trang trí nội thất chỉ bán hai loại bàn A và B. Giá bàn loại A là 120 đô la, bằng 30% giá bàn loại B. Nếu cửa hàng có 2000 chiếc bàn, trong đó 3/4 là bàn loại B thì tổng số tiền thu được sau khi bán hết số bàn là bao nhiêu? ",
           answers: [
-            { answer: "3", position: "A", correct: true },
-            { answer: "4", position: "B" },
-            { answer: "5", position: "C" },
-            { answer: "6", position: "D" },
+            { answer: "A: $114,000", position: "A" },
+            { answer: "B: $186,000", position: "B" },
+            { answer: "C: $294,000", position: "C" },
+            { answer: "D: $660,000", position: "D", correct: true },
           ],
         },
         {
-          question: "1+1",
+          question:
+            "Câu hỏi 2: Số cổ phiếu Kathy mua gấp 4 lần số cổ phiếu Carl mua, số cổ phiếu Carl mua gấp 3 lần số cổ phiếu Tom mua. Hỏi số nào dưới đây là tỉ lệ số cổ phiếu mà Kathy mua so với số cổ phiếu mà Tom mua?",
           answers: [
-            { answer: "1", position: "A" },
-            { answer: "2", position: "B", correct: true },
-            { answer: "3", position: "C" },
-            { answer: "4", position: "D" },
+            { answer: "A:	3/4", position: "A" },
+            { answer: "B:	4/3", position: "B" },
+            { answer: "C:	3/1", position: "C" },
+            { answer: "D:	12/1", position: "D", correct: true },
           ],
         },
         {
-          question: "2*2",
+          question: "Câu hỏi 3: 3,003/2,002=",
           answers: [
-            { answer: "2", position: "A" },
-            { answer: "3", position: "B" },
-            { answer: "5", position: "C" },
-            { answer: "4", position: "D", correct: true },
+            { answer: "A: 1,05", position: "A" },
+            { answer: "B: 1,50015", position: "B" },
+            { answer: "C: 1,501", position: "C" },
+            { answer: "D: 1,5", position: "D", correct: true },
           ],
         },
         {
-          question: "2*3",
+          question:
+            "Câu hỏi 4: Năm ngoái, cứ 100 triệu xe chạy trên một con đường nào đó sẽ có 96 xe gây tai nạn.Nếu có 3 tỷ xe chạy trên đường thì có bao nhiêu xe gây tai nạn? (1 tỷ = 1.000.000.000).",
           answers: [
-            { answer: "2", position: "A" },
-            { answer: "3", position: "B" },
-            { answer: "5", position: "C" },
-            { answer: "6", position: "D", correct: true },
+            { answer: "A: 288", position: "A" },
+            { answer: "B: 320", position: "B" },
+            { answer: "C: 2.880 ", position: "C", correct: true },
+            { answer: "D: 3.200", position: "D" },
           ],
         },
         {
-          question: "5+3",
+          question: "Câu hỏi 5: 45% của 7/12 của 240 có giá trị là bao nhiêu?",
           answers: [
-            { answer: "2", position: "A" },
-            { answer: "3", position: "B" },
-            { answer: "5", position: "C" },
-            { answer: "8", position: "D", correct: true },
+            { answer: "A: 63", position: "A", correct: true },
+            { answer: "B: 90", position: "B" },
+            { answer: "C: 108", position: "C" },
+            { answer: "D: 140", position: "D" },
           ],
         },
         {
-          question: "3-3",
+          question: "Câu hỏi 6: Nếu 45% của n là 405 thì 35% của n là?",
           answers: [
-            { answer: "0", position: "A", correct: true },
-            { answer: "3", position: "B" },
-            { answer: "5", position: "C" },
-            { answer: "4", position: "D" },
+            { answer: "A: 61", position: "A" },
+            { answer: "B: 64", position: "B" },
+            { answer: "C: 142", position: "C" },
+            { answer: "D: 315", position: "D", correct: true },
           ],
         },
         {
-          question: "3*2",
+          question:
+            "Câu hỏi 7: Chiếc đồng hồ nhắc việc cứ 15 phút lại reo 1 lần. Nếu đồng hồ đã reo vào lúc 12:40 thì thời điểm nào dưới đây là thời điểm mà đồng hồ có thể reo?",
           answers: [
-            { answer: "2", position: "A" },
-            { answer: "3", position: "B" },
-            { answer: "6", position: "C", correct: true },
-            { answer: "4", position: "D" },
+            { answer: "A: 4h05p", position: "A" },
+            { answer: "B: 5h30p", position: "B" },
+            { answer: "C: 6h45p", position: "C" },
+            { answer: "D: 8h10p", position: "D", correct: true },
           ],
         },
         {
-          question: "0*2",
+          question:
+            "Câu hỏi 8: Nếu x ≥8 và y ≤3 thì điều nào sau đây chắc chắn đúng?",
           answers: [
-            { answer: "2", position: "A" },
-            { answer: "3", position: "B" },
-            { answer: "0", position: "C", correct: true },
-            { answer: "4", position: "D" },
+            { answer: "A: x + y ≥5", position: "A" },
+            { answer: "B: x + y ≤11", position: "B" },
+            { answer: "C: x – y ≥5", position: "C", correct: true },
+            { answer: "D: x – y ≤5", position: "D" },
           ],
         },
         {
-          question: "9*2",
+          question:
+            "Câu hỏi 9: Trung bình của 6, 8 và 10 bằng trung bình của 7, 9, và",
           answers: [
-            { answer: "2", position: "A" },
-            { answer: "3", position: "B" },
-            { answer: "18", position: "C", correct: true },
-            { answer: "4", position: "D" },
+            { answer: "A: 5", position: "A" },
+            { answer: "B: 7", position: "B" },
+            { answer: "C: 8", position: "C", correct: true },
+            { answer: "D: 9", position: "D" },
           ],
         },
         {
-          question: "7+5",
+          question:
+            "Câu hỏi 10: Nhà Thanh có ao bèo 1.000m2, ngày hôm sau số lượng bèo sẽ nở gấp đôi ngày hôm trước, đến ngày thứ 18 thì bèo đã nở được nửa ao. Vậy đến ngày thứ bao nhiêu thì bèo sẽ nở đầy ao?",
           answers: [
-            { answer: "2", position: "A" },
-            { answer: "16", position: "B" },
-            { answer: "12", position: "C", correct: true },
-            { answer: "4", position: "D" },
+            { answer: "A: Ngày thứ 1", position: "A" },
+            { answer: "B: Ngày thứ 19", position: "B", correct: true },
+            { answer: "C: Ngày thứ 36", position: "C" },
+            { answer: "D: Ngày thứ 42", position: "D" },
           ],
         },
         {
-          question: "6*9",
+          question:
+            "Câu hỏi 11: 6 con cáo ăn thịt 6 con gà trong vòng 6 phút. Vậy phải bao nhiêu con cáo mới có thể ăn hết 60 con gà trong vòng 1 giờ?",
           answers: [
-            { answer: "54", position: "A", correct: true },
-            { answer: "16", position: "B" },
-            { answer: "0", position: "C" },
-            { answer: "4", position: "D" },
+            { answer: "A: 6", position: "A", correct: true },
+            { answer: "B: 12", position: "B" },
+            { answer: "C: 30", position: "C" },
+            { answer: "D: 60", position: "D" },
           ],
         },
         {
-          question: "1+8",
+          question:
+            "Câu hỏi 12: Nếu a = b , b > c và c = d thì mối quan hệ giữa a và d là?",
           answers: [
-            { answer: "2", position: "A" },
-            { answer: "16", position: "B" },
-            { answer: "0", position: "C" },
-            { answer: "9", position: "D", correct: true },
+            { answer: "A: a>d", position: "A", correct: true },
+            { answer: "B: a<d", position: "B" },
+            { answer: "C: a=d", position: "C" },
+            { answer: "D: Không xác định được", position: "D" },
           ],
         },
         {
-          question: "4*4",
+          question:
+            "Câu hỏi 13: Nếu từ WOLF tương ứng với số 8526, thì từ FLOW tương ứng với số nào sau đây?",
           answers: [
-            { answer: "2", position: "A" },
-            { answer: "16", position: "B", correct: true },
-            { answer: "0", position: "C" },
-            { answer: "4", position: "D" },
+            { answer: "2", position: "A: 6258", correct: true },
+            { answer: "16", position: "B: 2856" },
+            { answer: "0", position: "C: 5862" },
+            { answer: "4", position: "D: 6852" },
           ],
         },
         {
-          question: "8*6",
+          question:
+            "Câu 14: Nếu 5y – 3x = 7 và 6y + 6x = 2 thì giá trị của y là?",
           answers: [
-            { answer: "2", position: "A" },
-            { answer: "16", position: "B" },
-            { answer: "48", position: "C", correct: true },
-            { answer: "4", position: "D" },
+            { answer: "A: 1", position: "A", correct: true },
+            { answer: "B: 2", position: "B" },
+            { answer: "C: 3", position: "C" },
+            { answer: "D: 4", position: "D" },
           ],
         },
         {
-          question: "7*7",
+          question:
+            "Câu 15: Một vài fan của Trấn Thành là fan của Trường Giang. Và một vài fan của Trường Giang đồng thời là fan của Lê Giang. Như vậy một vài fan của Trấn Thành chắc chắn là fan của Lê Giang?",
           answers: [
-            { answer: "49", position: "A", correct: true },
-            { answer: "16", position: "B" },
-            { answer: "0", position: "C" },
-            { answer: "4", position: "D" },
+            { answer: "A: Rất chuẩn", position: "A" },
+            { answer: "B: Sai rồi", position: "B", correct: true },
           ],
         },
       ],
