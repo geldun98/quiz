@@ -1,47 +1,73 @@
 <template>
   <div class="register">
-    <div class="register-form">
-      <div class="banner">
-        <img src="@/assets/banner.png" alt="banner" />
+    <div class="register-box">
+      <div class="logo">
+        <img class="logo-image" src="@/assets/logo.png" alt="rikkei.edu.vn" />
       </div>
-      <div class="input-filed input-name">
-        <input
-          v-model="name"
-          type="text"
-          placeholder="Nhập tên"
-          :class="{ validateFiled: error.name }"
-          @focus="handleFocus('name')"
-        />
-        <div v-if="error.name" class="show-message">
-          Vui lòng nhập đầy đủ tên
+      <h1 class="register-box-title">Thông tin đề thi</h1>
+      <div class="register-form">
+        <div class="register-form-info">
+          <span class="text-title">Tên đề thi</span>
+          <span class="text-content">Test GMAT</span>
         </div>
-      </div>
-      <div class="input-filed input-email">
-        <input
-          v-model="email"
-          type="text"
-          placeholder="Nhập email"
-          @focus="handleFocus('email')"
-          :class="{ validateFiled: error.email }"
-        />
-        <div v-if="error.email" class="show-message" :class="error">
-          Vui lòng nhập email
+        <div class="register-form-info">
+          <span class="text-title">Tổng số câu hỏi</span>
+          <span class="text-content">15</span>
         </div>
-      </div>
-      <div class="input-filed input-phone">
-        <input
-          v-model="phone"
-          type="text"
-          placeholder="Nhập số điện thoại"
-          @focus="handleFocus('phone')"
-          :class="{ validateFiled: error.phone }"
-        />
-        <div v-if="error.phone" class="show-message" :class="error">
-          Vui lòng nhập số điện thoại
+        <div class="register-form-info">
+          <span class="text-title">Thời gian kết thúc</span>
+          <span class="text-content">15 (phút)</span>
         </div>
-      </div>
-      <div class="register-submit">
-        <button @click="handleSubmit">Bắt đầu làm bài</button>
+        <div class="register-form-info">
+          <span class="text-center-bold"
+            >Nhập tên, email, số điện thoại để làm bài</span
+          >
+        </div>
+        <div class="register-form-input">
+          <div class="register-form-input-title">Họ và tên <em>*</em></div>
+          <div class="register-form-input-content">
+            <input
+              v-model="fullname"
+              type="text"
+              placeholder="Họ và tên"
+              @focus="handleFocus('fullname')"
+            />
+            <div v-if="error.fullname" class="error-message">
+              Nhập lại trường này
+            </div>
+          </div>
+        </div>
+        <div class="register-form-input">
+          <div class="register-form-input-title">Email <em>*</em></div>
+          <div class="register-form-input-content">
+            <input
+              v-model="email"
+              type="text"
+              placeholder="Email"
+              @focus="handleFocus('email')"
+            />
+            <div v-if="error.email" class="error-message">
+              Nhập lại trường này
+            </div>
+          </div>
+        </div>
+        <div class="register-form-input">
+          <div class="register-form-input-title">Số điện thoại <em>*</em></div>
+          <div class="register-form-input-content">
+            <input
+              v-model="phone"
+              type="text"
+              placeholder="Số điện thoại"
+              @focus="handleFocus('phone')"
+            />
+            <div v-if="error.phone" class="error-message">
+              Nhập lại trường này
+            </div>
+          </div>
+        </div>
+        <div class="register-form-submit">
+          <button @click="handleSubmit">Bắt đầu làm bài</button>
+        </div>
       </div>
     </div>
   </div>
@@ -49,14 +75,14 @@
 
 <script>
 export default {
-  name: "start-comp",
+  name: "register-comp",
   data() {
     return {
-      name: "",
+      fullname: "",
       email: "",
       phone: "",
       error: {
-        name: false,
+        fullname: false,
         email: false,
         phone: false,
       },
@@ -64,8 +90,8 @@ export default {
   },
   methods: {
     handleSubmit() {
-      if (this.name.trim().length < 2) {
-        this.error.name = true;
+      if (this.fullname.trim().length < 3) {
+        this.error.fullname = true;
       }
       if (!this.validateEmail(this.email)) {
         this.error.email = true;
@@ -73,17 +99,18 @@ export default {
       if (!this.validatePhone(this.phone)) {
         this.error.phone = true;
       }
-      if (!this.error.email && !this.error.name && !this.error.phone) {
-        let user = {
-          name: this.name,
+      if (!this.error.fullname && !this.error.email && !this.error.phone) {
+        let dataUser = {
+          fullname: this.fullname,
           email: this.email,
           phone: this.phone,
         };
-        this.$emit("handleRegister", user);
+
+        this.$emit("handleRegister", dataUser);
       }
     },
-    handleFocus(value) {
-      this.error[value] = false;
+    handleFocus(name) {
+      this.error[name] = false;
     },
     validateEmail(email) {
       let mailformat =
@@ -103,78 +130,99 @@ export default {
   },
 };
 </script>
-
 <style lang="scss" scoped>
 .register {
-  &-form {
-    position: relative;
-    top: 100px;
-    width: 100%;
-    max-width: 600px;
+  width: 100%;
+  min-height: 100vh;
+  background-image: url("@/assets/background.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  &-box {
+    max-width: 540px;
 
-    height: auto;
-    background: white;
     margin: 0 auto;
-    padding: 25px;
-    border-radius: 10px;
-  }
-  &-submit {
-    display: flex;
-    justify-content: center;
-
-    button {
-      outline: none;
-      border: 0;
-      color: white;
-      background: #bb2327;
-      font-size: 18px;
+    &-title {
+      text-align: center;
+      font-size: 30px;
       font-weight: 400;
-      padding: 10px 25px;
-      cursor: pointer;
-      border-radius: 10px;
+      color: #333333;
+      padding-bottom: 20px;
     }
   }
 }
-input {
-  -webkit-user-select: text; /* Chrome, Opera, Safari */
-  -moz-user-select: text; /* Firefox 2+ */
-  -ms-user-select: text; /* IE 10+ */
-  user-select: text; /* Standard syntax */
-  font-family: "Roboto", sans-serif;
-  font-size: 18px;
-  padding: 10px 15px;
 
-  width: 100%;
-  background: #ecf0f1;
-  border: 0;
-  outline: 2px solid transparent;
-  border-radius: 10px;
-  &:focus {
-    outline-color: #2c3e50;
+.logo {
+  padding: 50px 0;
+  text-align: center;
+}
+.logo-image {
+  max-height: 50px;
+}
+.text-title {
+  display: inline-block;
+  font-weight: 600;
+  width: 200px;
+}
+.text-content {
+  color: #2c3e50;
+}
+.text-center-bold {
+  text-align: center;
+  display: block;
+  font-weight: 600;
+}
+.register-form {
+  &-info {
+    padding: 10px 5px;
+    border-bottom: 1px solid #ecf0f1;
   }
-  &::placeholder {
-    font-weight: 400;
+  &-input {
+    border-bottom: 1px solid #ecf0f1;
+    &-title {
+      width: 200px;
+      em {
+        color: red;
+      }
+    }
+    &-content {
+      flex: 1;
+    }
+    input {
+      width: 100%;
+      font-size: 16px;
+      font-family: "Roboto", sans-serif;
+      padding: 6px 12px;
+      outline: none;
+      border: 1px solid #bdc3c7;
+      &:focus {
+        border-color: #3498db;
+      }
+    }
+    display: flex;
+    align-items: center;
+    padding: 10px 5px;
   }
-}
-.input-filed {
-  margin-bottom: 25px;
-}
-.show-message {
-  font-weight: 300;
-  padding-top: 5px;
-  color: #bb2327;
-}
-
-.validateFiled {
-  outline-color: #bb2327;
-}
-.banner {
-  width: 100%;
-  display: flex;
-  justify-content: right;
-  img {
-    width: 150px;
+  &-submit {
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    button {
+      padding: 6px 12px;
+      outline: none;
+      border: 0;
+      color: white;
+      background: #3498db;
+      font-size: 16px;
+      font-family: "Roboto", sans-serif;
+      border-radius: 5px;
+      cursor: pointer;
+    }
   }
-  padding-bottom: 25px;
+  .error-message {
+    font-size: 14px;
+    padding-top: 5px;
+    color: #e74c3c;
+  }
 }
 </style>
