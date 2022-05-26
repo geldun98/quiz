@@ -10,7 +10,7 @@
       :key="index"
     >
       <div class="box-question">
-        <h2>{{ element.question }}</h2>
+        <h3>{{ element.question }}</h3>
       </div>
 
       <ul class="box-answer" :class="isClick ? '' : 'preventClick'">
@@ -384,12 +384,10 @@ li {
   &.correct {
     background-color: #3498db;
     color: white;
-    font-weight: 600;
   }
   &.incorrect {
     background-color: #e74c3c;
     color: white;
-    font-weight: 600;
   }
 }
 .preventClick {
@@ -401,7 +399,7 @@ li {
 }
 select {
   margin-top: 15px;
-  font-family: "Source Sans Pro", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 18px;
   outline: none;
   padding: 5px 10px;
